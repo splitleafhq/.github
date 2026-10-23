@@ -1,1 +1,1 @@
-<p align="center"><img src="leaf.png" alt="Splitleaf" width="160"></p>
+<p align="center"><img src="wordmark.png" alt="Splitleaf" width="320"></p>
