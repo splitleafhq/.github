@@ -23,7 +23,7 @@ How tests in these repos are written. A test earns its place by failing when som
 8. Keep a test in one process, with no network and no sleep. Start a child process or a local server only when that boundary is what's tested: a CLI's exit code and output, a hook's input and output.
 9. No sleep unless elapsed time is the behavior. Fake the clock instead (rule 6).
 10. A test touches only what it declares: its own temp directory and `HOME`, and fakes for host tools it doesn't test. No fixed path, port or global shared between files, so test files run in parallel.
-11. A test file finishes within 60 seconds.
+11. A test file finishes within 60 seconds. A file that starts child processes or a local server (rule 8) has 300.
 
 ## Removing a test
 
@@ -42,5 +42,5 @@ A test that breaks these rules can go when another test still fails on the same 
 | 7 | Go wiki [TestComments](https://go.dev/wiki/TestComments), "Test Error Semantics" |
 | 8, 9 | Google Testing Blog, [Test Sizes](https://testing.googleblog.com/2010/12/test-sizes.html) (2010): small tests have no network or sleep, medium tests may use localhost; *Software Engineering at Google*, ch. 11: small tests run in one process, medium tests may start child processes |
 | 10 | Bazel [Test encyclopedia](https://bazel.build/reference/test-encyclopedia): tests are hermetic and "must not assume that any constant path is available for their exclusive use". The temp `HOME` and host-tool fakes are how these repos apply it |
-| 11 | Test Sizes: 60 seconds for a small test, 300 for a medium one; Bazel Test encyclopedia: a small target's timeout is 60 seconds. These repos take the small limit for every file: all measured files but a few already fit |
+| 11 | Test Sizes: 60 seconds for a small test, 300 for a medium one; Bazel Test encyclopedia: a small target's timeout is 60 seconds. These repos apply the two sizes per file: measured on the largest suite, files of in-process tests run in seconds, and files that start a daemon or a command per test take 65 to 126 seconds and cannot be trimmed under 60 |
 | Removing | Thoughtworks Technology Radar, [Mutation testing](https://www.thoughtworks.com/radar/techniques/mutation-testing), done by hand |
