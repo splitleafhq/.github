@@ -27,7 +27,7 @@ How tests in these repos are written. A test earns its place by failing when som
 
 ## Removing a test
 
-A test that breaks these rules can go when another test still fails on the same regression; name that test in the pull request. When it's unclear whether a test catches anything, run a manual mutation check: break the behavior it names and run it. A failing test is a bug report, never a removal candidate.
+A test that breaks these rules can go when another test still fails on the same regression; name that test in the pull request. Show it with a manual mutation check: break the behavior in the source, see the named test fail, and restore the source. Reading the tests is not enough to tell. Loosening an assertion needs the same check. Text the repository's docs promise, or that a caller or an agent acts on, is a contract (rule 7) and stays pinned. A failing test is a bug report, never a removal candidate.
 
 ## Sources
 
@@ -43,4 +43,4 @@ A test that breaks these rules can go when another test still fails on the same 
 | 8, 9 | Google Testing Blog, [Test Sizes](https://testing.googleblog.com/2010/12/test-sizes.html) (2010): small tests have no network or sleep, medium tests may use localhost; *Software Engineering at Google*, ch. 11: small tests run in one process, medium tests may start child processes |
 | 10 | Bazel [Test encyclopedia](https://bazel.build/reference/test-encyclopedia): tests are hermetic and "must not assume that any constant path is available for their exclusive use". The temp `HOME` and host-tool fakes are how these repos apply it |
 | 11 | Test Sizes: 60 seconds for a small test, 300 for a medium one; Bazel Test encyclopedia: a small target's timeout is 60 seconds. These repos apply the two sizes per file: on the largest suite measured, every file fits, and the only files over 60 seconds (65 to 126) start a daemon or a command per test |
-| Removing | Thoughtworks Technology Radar, [Mutation testing](https://www.thoughtworks.com/radar/techniques/mutation-testing), done by hand |
+| Removing | Thoughtworks Technology Radar, [Mutation testing](https://www.thoughtworks.com/radar/techniques/mutation-testing), done by hand. Requiring it for every removal and loosening is these repos' choice: in 7 of 9 pull requests that trimmed tests under these rules, a reviewer's mutation found a removal or loosening that reading had passed |
