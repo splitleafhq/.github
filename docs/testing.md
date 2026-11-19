@@ -27,7 +27,7 @@ How tests in these repos are written. A test earns its place by failing when som
 
 ## Removing a test
 
-A test that breaks these rules can go when another test still fails on the same regression; name that test in the pull request. Show it with a manual mutation check: break the behavior in the source, see the named test fail, and restore the source. Reading the tests is not enough to tell. Loosening an assertion needs the same check. Text the repository's docs promise, or that a caller or an agent acts on, is a contract (rule 7) and stays pinned. A failing test is a bug report, never a removal candidate.
+A test that breaks these rules can go when another test still fails on the same regression; name that test in the pull request. Show that the named test fails, with a manual mutation check: break the behavior in the source, see the test fail, and restore the source. Reading the tests is not enough. Loosening an assertion needs the same check. Text the repository's docs promise, or that a caller or an agent acts on, is a contract (rule 7): don't remove or loosen its test. A failing test is a bug report, never a removal candidate.
 
 ## Sources
 
